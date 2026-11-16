@@ -2829,3 +2829,257 @@ pre.ux-pre:hover .ux-copy, .ux-copy:focus-visible { opacity: 1; }
 @media (max-width: 700px) {
   .ux-top { width: 38px; height: 38px; bottom: 14px; inset-inline-end: 14px; }
 }
+
+/* ═══ v38 — لكل وحدة لونها ══════════════════════════
+   ستّة ألوان هادئة تظهر في موضعين فقط: رقم الدرس، والحدّ الجانبي.
+   لا خلفيات ولا زخرفة. الغرض أن يعرف القارئ أين هو. */
+
+#unit-1 { --u: #5f7d14; }
+#unit-2 { --u: #1f6b7a; }
+#unit-3 { --u: #8a5a1f; }
+#unit-4 { --u: #33569b; }
+#unit-5 { --u: #9c3f52; }
+#unit-6 { --u: #5f4a9c; }
+
+html[data-theme="dark"] #unit-1 { --u: #bce36e; }
+html[data-theme="dark"] #unit-2 { --u: #6cc6d6; }
+html[data-theme="dark"] #unit-3 { --u: #e3ab68; }
+html[data-theme="dark"] #unit-4 { --u: #93b2f0; }
+html[data-theme="dark"] #unit-5 { --u: #f099a7; }
+html[data-theme="dark"] #unit-6 { --u: #bba8f2; }
+
+html[data-unit="1"] { --u: #5f7d14; }
+html[data-unit="2"] { --u: #1f6b7a; }
+html[data-unit="3"] { --u: #8a5a1f; }
+html[data-unit="4"] { --u: #33569b; }
+html[data-unit="5"] { --u: #9c3f52; }
+html[data-unit="6"] { --u: #5f4a9c; }
+
+html[data-theme="dark"][data-unit="1"] { --u: #bce36e; }
+html[data-theme="dark"][data-unit="2"] { --u: #6cc6d6; }
+html[data-theme="dark"][data-unit="3"] { --u: #e3ab68; }
+html[data-theme="dark"][data-unit="4"] { --u: #93b2f0; }
+html[data-theme="dark"][data-unit="5"] { --u: #f099a7; }
+html[data-theme="dark"][data-unit="6"] { --u: #bba8f2; }
+
+/* الفهرس: رقم الدرس والحدّ الجانبي */
+.lesson-block .lc-num { color: var(--u, currentColor); }
+.lesson-block.ready { border-inline-start-color: var(--u, var(--lime)) !important; }
+.unit-head h3 { color: var(--ink); }
+.unit-head { border-inline-start: 3px solid var(--u, var(--line-ink)); padding-inline-start: 14px; }
+html[data-theme="dark"] .unit-head { border-inline-start-color: var(--u, var(--line-ink)); }
+
+/* الدرس: رقم الدرس وشريط المسار */
+html[data-unit] .lesson-tags span:first-child {
+  color: var(--u); box-shadow: inset 0 0 0 1px currentColor; border-color: transparent;
+}
+html[data-unit] .crumbs {
+  border-inline-start: 3px solid var(--u);
+  padding-inline-start: 10px;
+}
+
+/* ═══ v39 — الرئيسية كلوحة ════════════════════════════
+   على الحاسوب: ستّ وحدات في شبكة ثلاثية، والدروس صفوف قصيرة
+   تُفتح عند الضغط. على الهاتف: كل شيء كما كان، بلا تغيير. */
+
+@media (min-width: 1024px) {
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    align-items: start;
+    margin-bottom: 10px;
+  }
+  .board > .section {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 1px solid var(--line-ink);
+    border-radius: var(--r-lg);
+    background: var(--surface);
+    overflow: hidden;
+    border-top: 3px solid var(--u, var(--line-ink));
+  }
+  .board .unit-head {
+    border: 0;
+    padding: 12px 14px 8px;
+    margin: 0;
+    background: var(--surface-2);
+    display: block;
+  }
+  .board .unit-head h3 { font-size: 13.5px; line-height: 1.5; margin: 0; }
+  .board .unit-head .unit-meta,
+  .board .unit-head p { display: none; }
+  .board .lessons-list { border: 0; margin: 0; }
+
+  .board .lesson-block {
+    border: 0;
+    border-top: 1px solid var(--line-ink);
+    background: transparent;
+    padding: 0;
+    display: block;
+  }
+  .board .lesson-block > summary {
+    padding: 9px 12px;
+    gap: 9px;
+    display: grid;
+    grid-template-columns: 26px minmax(0, 1fr) 14px;
+    align-items: center;
+    min-height: 38px;
+  }
+  .board .lesson-block .lc-num { font-size: 12px; }
+  .board .lesson-block .lc-title { font-size: 13px; line-height: 1.45; }
+  .board .lesson-block .lc-sub,
+  .board .lesson-block .lc-meta { display: none; }
+  .board .lesson-block .lc-chev { grid-column: 3; }
+  .board .lesson-block .lc-main { grid-column: 2; }
+  .board .lesson-block .lc-body { padding: 0 12px 14px; }
+  .board .lesson-block .lc-list li { font-size: 12px; }
+  .board .lesson-block:hover > summary { background: var(--surface-2); }
+  .board .lesson-block[open] > summary { background: var(--surface-3); }
+}
+
+/* على الشاشات المتوسطة: عمودان */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* اللوحة أولًا على الحاسوب: من يزور الموقع يريد الدروس لا المقدّمة */
+@media (min-width: 1024px) {
+  .page-shell { display: flex; flex-direction: column; }
+  .board { order: 1; margin-bottom: 16px !important; }
+  .progress-card { order: 2; margin: 0 0 16px !important; }
+  #apply { order: 3; margin-top: 4px !important; }
+  .page-shell > .section:not(#apply) { order: 4; }
+  .lede { padding-block: 22px 24px; }
+}
+
+/* ضبط اللوحة: بطاقات متساوية، ورأس محكم بدل الرقم المنفصل */
+@media (min-width: 1024px) {
+  .board { align-items: stretch; }
+  .board > .section { display: flex; flex-direction: column; }
+  .board > .section .lessons-list { flex: 1; }
+  .board .unit-head {
+    display: flex; align-items: baseline; gap: 8px;
+    padding: 10px 12px 9px;
+    border-bottom: 1px solid var(--line-ink);
+  }
+  .board .unit-head > span {
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    color: var(--u, var(--lime-dark)); flex: 0 0 auto;
+  }
+  .board .unit-head h3 { flex: 1 1 auto; font-size: 13px; margin: 0; }
+  .board .unit-head small {
+    flex: 0 0 auto; font-size: 10px; color: var(--ink-muted); display: block;
+  }
+  @media (max-width: 1199px) { .board .unit-head small { display: none; } }
+}
+
+/* العلامة المرسومة: الفاصلة الأصلية، بحجم مضبوط لا يعتمد على الخط */
+.brand-mark { font-size: 0; }
+.brand-mark svg { display: block; width: 19px; height: 19px; transform: translateY(1px); }
+@media (max-width: 700px) { .brand-mark svg { width: 18px; height: 18px; } }
+
+/* ═══ v42 — تناسب الشاشات ═════════════════════════════
+   ثلاث طبقات فقط: هاتف (≤٧٦٧)، لوحي (٧٦٨–١٠٢٣)، مكتب (>١٠٢٣).
+   الهدف: رأس لا يتمدّد، وعمود قراءة يتنفّس على الكبير. */
+
+/* ── الرأس: سطر واحد دائمًا ─────────────────────────── */
+.site-header-inner { gap: 12px; }
+.site-nav {
+  margin-inline-start: auto;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-block: 2px;
+}
+.site-nav::-webkit-scrollbar { display: none; }
+.site-nav a { white-space: nowrap; flex: 0 0 auto; }
+
+@media (max-width: 767px) {
+  .site-header-inner { padding: 9px 14px; min-height: 58px; }
+  .brand { font-size: 16px; gap: 8px; min-width: 0; }
+  .brand small { display: none; }
+  .site-nav { gap: 14px; font-size: 13px; }
+  .nav-cta { padding: 5px 11px; font-size: 12.5px; }
+  .brand small { display: none; }
+}
+
+/* ── عمود القراءة: يتّسع مع الشاشة ──────────────────── */
+.lesson-body, .section-heading, .toc, .lesson-hero-inner {
+  --measure: 70ch;
+}
+@media (min-width: 768px) {
+  .lesson-body { font-size: 17px; }
+  .lesson-body p, .lesson-body li { line-height: 1.95; }
+}
+@media (min-width: 1024px) {
+  .page-shell, .site-header-inner, .lede-inner, .tape-inner, .site-footer-inner { max-width: 1180px; }
+  .lesson-body { max-width: 740px; font-size: 17.5px; }
+  .lesson-hero-inner { max-width: 740px; }
+  .lesson-body h2 { font-size: 23px; margin-top: 42px; }
+  .lesson-body pre { font-size: 13.5px; }
+}
+@media (min-width: 1440px) {
+  .page-shell, .site-header-inner, .lede-inner, .tape-inner, .site-footer-inner { max-width: 1240px; }
+  .lesson-body { max-width: 780px; font-size: 18px; }
+  .lesson-hero-inner { max-width: 780px; }
+  /* الفهرس يقترب من عمود النص بدل أن يلتصق بحافة الشاشة */
+  .ux-toc { inset-inline-end: max(20px, calc(50vw - 640px)); width: 200px; }
+}
+
+/* ── الهاتف: تنفّس، وأهداف لمس مريحة ───────────────── */
+@media (max-width: 767px) {
+  .lesson-hero { padding-block: 26px 22px; }
+  .lesson-hero h1 { font-size: clamp(21px, 6.4vw, 26px); line-height: 1.4; }
+  .lesson-body { padding-inline: 16px; }
+  .lesson-body h2 { font-size: 19.5px; margin-top: 34px; }
+  .lesson-body p, .lesson-body li { font-size: 16px; line-height: 1.95; }
+  .lesson-body pre { font-size: 12.5px; }
+  .lesson-nav a { min-height: 52px; }
+  .site-footer { padding-block: 26px; }
+  .site-footer-inner { font-size: 12.5px; gap: 10px; }
+  .ux-copy { font-size: 12px; padding: 8px 11px; }
+}
+
+/* لوحي: بين الاثنين */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .lesson-body { max-width: 700px; }
+  .lesson-hero-inner { max-width: 700px; }
+}
+
+/* الرأس على الهاتف: سطر واحد، لا سطرين */
+@media (max-width: 767px) {
+  .site-header-inner { flex-wrap: nowrap; gap: 10px; align-items: center; }
+  .site-nav {
+    flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden;
+    -webkit-mask-image: linear-gradient(to left, transparent 0, #000 14px);
+            mask-image: linear-gradient(to left, transparent 0, #000 14px);
+    padding-inline-end: 14px;
+  }
+  .site-nav a { padding-block: 6px; }
+}
+
+/* ٤٨٠ وأضيق: العلامة وحدها في الرأس، والتنقّل يتّسع */
+@media (max-width: 479px) {
+  .brand > span:last-child { display: none; }
+  .site-header-inner { gap: 8px; padding: 8px 12px; }
+  .site-nav {
+    -webkit-mask-image: none; mask-image: none;
+    gap: 13px; font-size: 12.5px;
+    padding-inline-end: 4px;
+  }
+  .site-nav a { padding-block: 8px; }
+  .nav-cta { padding: 4px 10px; }
+}
+
+@media (max-width: 479px) {
+  .site-nav { gap: 11px; font-size: 12.5px; }
+  .site-nav a[href*="start.html"] { display: none; }
+}
+
+/* الفهرس يلتصق بعمود النص على الشاشات الواسعة بدل حافة الشاشة */
+@media (min-width: 1440px) {
+  .ux-toc { inset-inline-end: max(20px, calc(50vw - 620px)); }
+}
